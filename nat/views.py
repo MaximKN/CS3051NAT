@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from nat.models import Article
+from rssparser import *
 
 
 def home(request):
+    parse_rss()
     articles = Article.objects.all()
     context = {
-        'articles': articles
+        'articles': articles,
     }
     return render(request, 'nat/home.html', context)
 

@@ -3,16 +3,25 @@ from django.db import models
 
 SHORT_LEN_TEXT = 1000
 
+
 class Article(models.Model):
     title = models.CharField(max_length=200)
-    text = models.TextField()
-    user = models.ForeignKey(User)
+    description = models.TextField()
+    source = models.IntegerField()
+    link = models.CharField(max_length=200)
+
+    def set_attributes(self, title, description, source, link):
+        self.title = title
+        self.description = description
+        self.source = source
+        self.link = link
 
     def __unicode__(self):
         return self.title
-
+'''
     def get_short_text(self):
-        if len(self.text) > SHORT_LEN_TEXT:
-            return self.text[:SHORT_LEN_TEXT]
+        if len(self.description) > SHORT_LEN_TEXT:
+            return escape(self.description[:SHORT_LEN_TEXT])
         else:
-            return self.text
+            return escape(self.description)
+'''
