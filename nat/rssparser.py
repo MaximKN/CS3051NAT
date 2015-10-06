@@ -1,7 +1,6 @@
 from nat.models import Article
 import feedparser
 
-
 def parse_rss():
     rss_urls = ['http://www.theguardian.com/uk/rss', 'http://feeds.bbci.co.uk/news/rss.xml?edition=uk',
                 'http://www.thetimes.co.uk/tto/news/uk/rss', 'http://www.dailymail.co.uk/home/index.rss',
