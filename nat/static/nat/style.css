@@ -3,3 +3,107 @@
 .main-content{
     margin-top: 80px;
 }
+
+ul.accordion {
+  list-style-type: none;
+  position: relative;
+  top: 0;
+  line-height: 1.5em;
+}
+
+ul.accordion li {
+  float: left;
+  width: 115px;
+  height: 115px;
+  display: block;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  background: #fff;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  /*-webkit-box-shadow: 1px 3px 5px #555;*/
+  /*-moz-box-shadow: 1px 3px 5px #555;*/
+  /*box-shadow: 1px 3px 5px #555;*/
+}
+
+
+ul.accordion li.bleft { border-left: 2px solid #fff; }
+
+ul.accordion li .heading {
+  /*background: #fff;*/
+  padding: 10px;
+  margin-top: 60px;
+  opacity: 0.9;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+  /*text-shadow: -1px -1px 1px #ccc;*/
+}
+
+ul.accordion li .description {
+  position: absolute;
+  width: 480px;
+  height: 175px;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+
+ul.accordion li .description h2 {
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 45px;
+  color: #ffffff;
+  text-align: left;
+  margin: 0 0 15px 20px;
+  /*text-shadow: -1px -1px 1px #ccc;*/
+}
+
+ul.accordion li .description p {
+  line-height: 14px;
+  margin: 10px 22px;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+ul.accordion li .description a {
+  position: absolute;
+  bottom: 5px;
+  left: 20px;
+  font-style: normal;
+  font-size: 11px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+ul.accordion li .description a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+ul.accordion li .bgDescription {
+  background: linear-gradient(0deg, #fff 40%, rgba(255,255,255,0));
+  height: 340px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  display: none;
+}
+
+ul.accordion li.bg1 { background: #005689; }
+
+ul.accordion li.bg2 { background: #196795; }
+
+ul.accordion li.bg3 { background: #3378A1; }
+
+ul.accordion li.bg4 { background: #4D89AC; }

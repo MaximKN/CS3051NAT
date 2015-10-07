@@ -1,3 +1,19 @@
+{#{% extends 'nat/base.html' %}#}
+{##}
+{#{% block title %}#}
+{#Home#}
+{#{% endblock %}#}
+{##}
+{#{%  block content %}#}
+{#    <h1>Home</h1>#}
+{#    {% for article in articles %}#}
+{#        <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>#}
+{#        <div>{{ article.description }}</div>#}
+{#        <pre>{{ article.link }}</pre>#}
+{#        <pre>{{ article.source }}</pre>#}
+{#    {% endfor %}#}
+{#{% endblock %}#}
+
 {% extends 'nat/base.html' %}
 
 {% block title %}
@@ -5,11 +21,45 @@ Home
 {% endblock %}
 
 {%  block content %}
-    <h1>Home</h1>
-    {% for article in articles %}
-        <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
-        <div>{{ article.description }}</div>
-        <pre>{{ article.link }}</pre>
-        <pre>{{ article.source }}</pre>
-    {% endfor %}
+    <ul class="accordion" id="accordion">
+      <li class="bg1">
+        <div class="heading">Heading</div>
+        <div class="bgDescription"></div>
+        <div class="description">
+          <h2>Heading 1</h2>
+          <p>Description 1</p>
+          <a href="#">Read more</a> </div>
+      </li>
+    </ul>
+    <ul class="accordion" id="accordion">
+      <li class="bg2">
+        <div class="heading">Heading2</div>
+        <div class="bgDescription"></div>
+        <div class="description">
+          <h2>Heading 2</h2>
+          <p>Description 2</p>
+          <a href="#">Read more</a> </div>
+      </li>
+    </ul>
+    <ul class="accordion" id="accordion">
+      <li class="bg3">
+        <div class="heading">Heading3</div>
+        <div class="bgDescription"></div>
+        <div class="description">
+          <h2>Heading 3</h2>
+          <p>Description 3</p>
+          <a href="#">Read more</a> </div>
+      </li>
+    </ul>
+    <ul class="accordion" id="accordion">
+      <li class="bg4">
+        <div class="heading">Heading4</div>
+        <div class="bgDescription"></div>
+        <div class="description">
+          <h2>Heading 4</h2>
+          <p>Description 4</p>
+          <a href="#">Read more</a> </div>
+      </li>
+    </ul>
+
 {% endblock %}
