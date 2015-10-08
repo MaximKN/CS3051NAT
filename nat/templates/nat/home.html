@@ -6,6 +6,16 @@ Home
 
 {%  block content %}
     <h1>Home</h1>
+    <li>
+    {% for newscategory in newscategories %}
+        <ul><a href="{% url 'newscategory' newscategory.id %}"> {{ newscategory.title }}</a></ul>
+    {% endfor %}
+    </li>
+    <li>
+    {% for rssfeed in rssfeeds %}
+        <ul><a href="{% url 'rssfeed' rssfeed.id %}"> {{ rssfeed.title }}</a></ul>
+    {% endfor %}
+    </li>
     {% for article in articles %}
         <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
         <div>{{ article.description }}</div>
