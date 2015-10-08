@@ -35,11 +35,11 @@ def show_category(request, newscategory_id):
     return render(request, 'nat/category.html', context)
 
 
-def show_feed(request, feed_id):
+'''def show_feed(request, feed_id):
     feed = get_object_or_404(RssFeed, id=feed_id)
     articles = feed.article_set.all()
     context = {
         'articles': articles,
         'feed': feed,
     }
-    return render(request, 'nat/feed.html', context)
+    return render(request, 'nat/feed.html', context)'''
