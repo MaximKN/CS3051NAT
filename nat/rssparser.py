@@ -1,7 +1,6 @@
 from nat.models import Article, RssFeed, NewsCategory
 import feedparser
 
-
 def parse_rss():
     # Code for using the RssFeed object instead of list of urls
     feeds = RssFeed.objects.all()

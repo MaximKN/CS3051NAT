@@ -38,6 +38,7 @@ class Article(models.Model):
     link = models.CharField(max_length=200)
     categories = models.ManyToManyField(NewsCategory)
     feed = models.ForeignKey(RssFeed, null=True)
+    search_order = models.IntegerField(default=0)
 
     def set_attributes(self, title, description, source, link):
         self.title = title
@@ -55,3 +56,12 @@ class Article(models.Model):
             return escape(self.description)
 '''
 
+'''
+Used to store user data
+'''
+class User(models.Model):
+    user_name = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "Username: " + self.user_name +  " Password: " + self.password
