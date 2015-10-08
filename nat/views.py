@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from rssparser import *
+from nat.rssparser import *
 
 
 
@@ -55,6 +55,10 @@ def search(request):
 
 def about(request):
     return render(request, 'nat/about.html')
+
+
+def login(request):
+    return render(request, 'nat/login.html')
 
 
 def show_article(request, article_id):

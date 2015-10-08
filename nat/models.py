@@ -26,3 +26,13 @@ class Article(models.Model):
         else:
             return escape(self.description)
 '''
+
+'''
+Used to store user data
+'''
+class User(models.Model):
+    user_name = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "Username: " + self.user_name +  " Password: " + self.password
