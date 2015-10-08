@@ -4,8 +4,24 @@
 Home
 {% endblock %}
 
+
+
 {%  block content %}
     <h1>Home</h1>
+    <html>
+
+<head>
+    <title>Search</title>
+</head>
+<body>
+
+    <form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
+
     {% for article in articles %}
         <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
         <div>{{ article.description }}</div>

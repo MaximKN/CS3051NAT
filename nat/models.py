@@ -9,6 +9,7 @@ class Article(models.Model):
     description = models.TextField()
     source = models.IntegerField()
     link = models.CharField(max_length=200)
+    search_order = models.IntegerField(default=0)
 
     def set_attributes(self, title, description, source, link):
         self.title = title

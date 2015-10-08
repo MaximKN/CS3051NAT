@@ -1,0 +1,30 @@
+<head>
+    <title>Search</title>
+</head>
+<body>
+
+    <form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
+
+{% if error %}
+        <p style="color: red;">Please submit a search term.</p>
+
+
+{% else %}
+    {% if articles %}
+        <p>You searched for: <strong>{{ query }}</strong></p>
+        <p>Found {{ articles|length }} article{{ articles|pluralize }}.</p>
+        <ul>
+            {% for article in articles %}
+            <a href={{article.link}}>{{ article.title }}</a>
+            <p></p>
+            {% endfor %}
+        </ul>
+{% else %}
+    <p>No article matched your search criteria.</p>
+{% endif %}
+{% endif %}
