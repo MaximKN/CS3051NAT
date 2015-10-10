@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
+import cgi
 
-SHORT_LEN_TEXT = 1000
+SHORT_LEN_TEXT = 200
 
 
 class NewsCategory(models.Model):
@@ -48,13 +49,13 @@ class Article(models.Model):
 
     def __unicode__(self):
         return self.title
-'''
+
     def get_short_text(self):
         if len(self.description) > SHORT_LEN_TEXT:
-            return escape(self.description[:SHORT_LEN_TEXT])
+            return cgi.escape(self.description[:SHORT_LEN_TEXT]) + "..."
         else:
-            return escape(self.description)
-'''
+            return cgi.escape(self.description)
+
 
 '''
 Used to store user data

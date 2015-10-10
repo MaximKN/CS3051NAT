@@ -82,7 +82,7 @@ Home
     
     {% for article in articles %}
         <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
-        <div>{{ article.description }}</div>
+        <div>{{ article.get_short_text }}</div>
         <pre>{{ article.link }}</pre>
         <pre>{{ article.source }}</pre>
     {% endfor %}

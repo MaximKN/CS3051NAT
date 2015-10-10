@@ -16,6 +16,7 @@ def home(request):
     }
     return render(request, 'nat/home.html', context)
 
+
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         #what the person types in for searching
@@ -52,8 +53,7 @@ def search(request):
                     articles[j] = articles[j+1]
                     articles[j+1] = temp
 
-        return render(request, 'nat/search_results.html',
-            {'articles': articles, 'query': qString})
+        return render(request, 'nat/search_results.html', {'articles': articles, 'query': qString})
     else:
         return render(request, 'nat/search_results.html', {'error': True})
 
