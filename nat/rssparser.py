@@ -1,7 +1,8 @@
-from nat.models import Article, RssFeed, NewsCategory
+import nat.models
 import feedparser
 import re
 import HTMLParser
+
 
 def striphtml(data):
     p = re.compile(r'<.*?>')
@@ -11,7 +12,7 @@ def striphtml(data):
 def parse_rss():
     print "Pulling data from rss feeds"
     # Code for using the RssFeed object instead of list of urls
-    feeds = RssFeed.objects.all()
+    feeds = nat.models.RssFeed.objects.all()
     urls = []
     for feed in feeds:
         urls.append(feed.feedUrl)
@@ -24,15 +25,15 @@ def parse_rss():
     for rss_url in rss_urls:
         # Later change this to parse urls retrieved from RssFeeds
         feeds = feedparser.parse(rss_url)
-        articles = Article.objects.all()
+        articles = nat.models.Article.objects.all()
         for entry in feeds.entries:
-            if not Article.objects.filter(title=entry.title).exists() or len(articles) == 0:
-                a = Article()
+            if not nat.models.Article.objects.filter(title=entry.title).exists() or len(articles) == 0:
+                a = nat.models.Article()
                 a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
                                  rss_number, entry.link)
                 a.save()
                 if 'categories' in entry and len(entry.categories) > 0:
-                    categoriesindb = NewsCategory.objects.all()
+                    categoriesindb = nat.models.NewsCategory.objects.all()
                     for category in entry.categories:
                         for dbcategory in categoriesindb:
                             if dbcategory.title == category:
@@ -41,3 +42,19 @@ def parse_rss():
 
         rss_number += 1
     print "Pulling complete!"
+
+
+def find_most_popular_articles():
+    articles = nat.models.Article.objects.all()
+    list_of_articles = ""
+    for article in articles:
+        list_of_articles += article.title + " "
+
+    BAD_CHARS = ".!?,\'\""
+
+    words = [word.strip(BAD_CHARS) for word in list_of_articles.strip().split() if len(word) > 6]
+
+    word_freq = {}
+
+    print max(set(words), key=words.count)
+
