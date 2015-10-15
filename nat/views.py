@@ -5,7 +5,6 @@ from nat.rssparser import *
 
 
 def home(request):
-    parse_rss()
     articles = Article.objects.all()
     newscategories = NewsCategory.objects.all()
     rssfeeds = RssFeed.objects.all()
