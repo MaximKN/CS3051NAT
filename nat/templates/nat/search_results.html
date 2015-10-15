@@ -20,8 +20,9 @@
         <p>Found {{ articles|length }} article{{ articles|pluralize }}.</p>
         <ul>
             {% for article in articles %}
-            <a href={{article.link}}>{{ article.title }}</a>
-            <p></p>
+            <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
+            <div>{{ article.description }}</div>
+            <pre>{{ article.link }}</pre>
             {% endfor %}
         </ul>
 {% else %}
