@@ -6,5 +6,5 @@ import time
 class Command(BaseCommand):
     def handle(self, **options):
         while True:
-            parse_rss()
+            parse_rss(0)
             time.sleep(60)
