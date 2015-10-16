@@ -40,12 +40,14 @@ class Article(models.Model):
     categories = models.ManyToManyField(NewsCategory)
     feed = models.ForeignKey(RssFeed, null=True)
     search_order = models.IntegerField(default=0)
+    date = models.DateField()
 
-    def set_attributes(self, title, description, source, link):
+    def set_attributes(self, title, description, source, link, date):
         self.title = title
         self.description = description
         self.source = source
         self.link = link
+        self.date = date
 
     def __unicode__(self):
         return self.title

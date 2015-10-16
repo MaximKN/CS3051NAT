@@ -43,7 +43,7 @@ def parse_rss(region):
             if not nat.models.Article.objects.filter(title=entry.title).exists() or len(articles) == 0:
                 a = nat.models.Article()
                 a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
-                                 rss_number, entry.link)
+                                 rss_number, entry.link, entry.pubDate)
                 a.save()
                 if 'categories' in entry and len(entry.categories) > 0:
                     categoriesindb = nat.models.NewsCategory.objects.all()
@@ -57,7 +57,7 @@ def parse_rss(region):
     print "Pulling complete!"
 
 
-def find_most_popular_articles():
+def find_most_popular_keyword():
     articles = nat.models.Article.objects.all()
     list_of_articles = ""
     for article in articles:
@@ -69,5 +69,5 @@ def find_most_popular_articles():
 
     word_freq = {}
 
-    print max(set(words), key=words.count)
+    return max(set(words), key=words.count)
 
