@@ -3,12 +3,14 @@ from rssparser import *
 from models import *
 from nat.rssparser import *
 
+region_specifier = 0;
 
 def home(request):
     articles = Article.objects.all()
     newscategories = NewsCategory.objects.all()
     rssfeeds = RssFeed.objects.all()
     context = {
+        'region_specifier': region_specifier,
         'articles': articles,
         'newscategories': newscategories,
         'rssfeeds': rssfeeds,
@@ -57,6 +59,11 @@ def search(request):
                     article.search_order += 50
                 if var(qString.lower(), 3) in article.description.lower():
                     article.search_order += 25
+                if len(qString) > 4:
+                    if (qString.lower() in article.title.lower()):
+                        article.search_order +=50
+                    if (qString.lower() in article.title.lower()):
+                        article.search_order +=25
         else:
             # find best articles to match higher search order = better
             for article in articles:

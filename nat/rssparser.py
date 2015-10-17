@@ -9,51 +9,54 @@ def striphtml(data):
     return p.sub('', data)
 
 
-def parse_rss(region):
+def parse_rss():
     print "Pulling data from rss feeds"
     # Code for using the RssFeed object instead of list of urls
     feeds = nat.models.RssFeed.objects.all()
     urls = []
     for feed in feeds:
         urls.append(feed.feedUrl)
-    print(urls)
     # rss_urls = ['http://feeds.bbci.co.uk/news/rss.xml?edition=uk',
     #             'http://www.thetimes.co.uk/tto/news/uk/rss',
     #             'http://www.dailymail.co.uk/home/index.rss',
     #             'http://feeds.skynews.com/feeds/rss/uk.xml',
     #             'http://www.tanea.gr/rss']
 
-    rss_urls = [['http://feeds.bbci.co.uk/news/rss.xml?edition=int', 'http://feeds.skynews.com/feeds/rss/world.xml', 'http://rss.upi.com/news/tn_int.rss', 'http://feeds.foxnews.com/foxnews/latest?format=xml'],
+    rss_all_urls = [['http://feeds.bbci.co.uk/news/rss.xml?edition=int', 'http://feeds.skynews.com/feeds/rss/world.xml', 'http://rss.upi.com/news/tn_int.rss', 'http://feeds.foxnews.com/foxnews/latest?format=xml'],
                 ['http://feeds.bbci.co.uk/news/rss.xml?edition=uk', 'http://www.dailymail.co.uk/home/index.rss', 'http://feeds.skynews.com/feeds/rss/uk.xml', 'http://www.thetimes.co.uk/tto/news/uk/rss'],
                 ['http://www.dailymail.co.uk/ushome/index.rss', 'http://www.usnews.com/rss/news', 'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml'],
                 ['http://www.france24.com/fr/france/rss', 'http://www.lemonde.fr/m-actu/rss_full.xml','http://www.lexpress.fr/rss/alaune.xml'],
                 ['http://wsrss.bbc.co.uk/russian/index.xml', 'http://www.pravda.ru/export-news.xml', 'https://russian.rt.com/rss/'],
                 ['http://www.dailymail.co.uk/auhome/index.rss', 'http://www.abc.net.au/news/feed/46182/rss.xml', 'http://www.smh.com.au/rssheadlines/top.xml'],
-                ['http://rss.in.gr/feed/news/greece/', 'http://ellinikanea.gr/feed/','http://www.tanea.gr/rss'],
-                []]
+                ['http://rss.in.gr/feed/news/greece/', 'http://ellinikanea.gr/feed/','http://www.tanea.gr/rss']]
     rss_number = 0
-    rss_specific = rss_urls[region];
-    print(rss_specific);
-    for rss_url in rss_specific:
-        print(rss_url);
-        # Later change this to parse urls retrieved from RssFeeds
-        feeds = feedparser.parse(rss_url)
-        articles = nat.models.Article.objects.all()
-        for entry in feeds.entries:
-            if not nat.models.Article.objects.filter(title=entry.title).exists() or len(articles) == 0:
-                a = nat.models.Article()
-                a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
-                                 rss_number, entry.link, entry.pubDate)
-                a.save()
-                if 'categories' in entry and len(entry.categories) > 0:
-                    categoriesindb = nat.models.NewsCategory.objects.all()
-                    for category in entry.categories:
-                        for dbcategory in categoriesindb:
-                            if dbcategory.title == category:
-                                a.categories.add(dbcategory)
+    country_specifier = 0;
+    for rss_country_urls in rss_all_urls:
+        for rss_url in rss_country_urls:
+            print(rss_url);
+            # Later change this to parse urls retrieved from RssFeeds
+            feeds = feedparser.parse(rss_url)
+            articles = nat.models.Article.objects.all()
+            for entry in feeds.entries:
+                if not nat.models.Article.objects.filter(title=entry.title).exists() or len(articles) == 0:
+                    a = nat.models.Article()
+                    if 'pubDate' in entry:
+                        a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
+                                        rss_number, entry.link, entry.pubDate, country_specifier)
+                    else:
+                         a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
+                                        rss_number, entry.link, country_specifier)
                     a.save()
+                    if 'categories' in entry and len(entry.categories) > 0:
+                        categoriesindb = nat.models.NewsCategory.objects.all()
+                        for category in entry.categories:
+                            for dbcategory in categoriesindb:
+                                if dbcategory.title == category:
+                                    a.categories.add(dbcategory)
+                        a.save()
 
-        rss_number += 1
+            rss_number += 1
+        country_specifier +=1
     print "Pulling complete!"
 
 

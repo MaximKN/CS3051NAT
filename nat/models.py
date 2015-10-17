@@ -41,13 +41,23 @@ class Article(models.Model):
     feed = models.ForeignKey(RssFeed, null=True)
     search_order = models.IntegerField(default=0)
     date = models.DateField()
+    country = models.IntegerField(default=0)
 
-    def set_attributes(self, title, description, source, link, date):
+    def set_attributes(self, title, description, source, link, date, specifier):
         self.title = title
         self.description = description
         self.source = source
         self.link = link
         self.date = date
+        self.country = specifier
+
+    def set_attributes(self, title, description, source, link,  specifier):
+        self.title = title
+        self.description = description
+        self.source = source
+        self.link = link
+        self.country = specifier
+        self.date = "1970-01-01"
 
     def __unicode__(self):
         return self.title
