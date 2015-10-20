@@ -9,11 +9,13 @@ def home(request):
     newscategories = NewsCategory.objects.all()
     rssfeeds = RssFeed.objects.all()
     popular = most_popular()
+    recent = most_recent()
     context = {
         'articles': articles,
         'newscategories': newscategories,
         'rssfeeds': rssfeeds,
         'popular' : popular,
+        'recent' : recent,
     }
     return render(request, 'nat/home.html', context)
 
@@ -21,7 +23,8 @@ def most_popular():
     keyword = find_most_popular_keyword()
     return Article.objects.filter(title__icontains=keyword)[:10]
 
-
+def most_recent():
+    return Article.objects.all().order_by('-id')[:10]
 
 def search(request):
     if 'q' in request.GET and request.GET['q']:

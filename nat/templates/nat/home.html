@@ -7,40 +7,82 @@
 {% endblock %}
 
 {%  block content %}
-    <h1>Most Mentioned</h1>
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        {% for article in popular %}
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-                            {{ article.title }}
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
-                    <div class="panel-body">
-                        <p>{{ article.description }}</p>
-                        <!-- Facebook -->
-                        <a href="http://www.facebook.com/sharer.php?u={{ article.link }}" target="_blank">
-                            <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
-                        </a>
+    {% load humanize %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Most Mentioned</h1>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    {% for article in popular %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                        {{ article.title }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
+                                <div class="panel-body">
+                                    <p>{{ article.description }}</p>
+                                    <!-- Facebook -->
+                                    <a href="http://www.facebook.com/sharer.php?u={{ article.link }}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                                    </a>
 
-                        <!-- Twitter -->
-                        <a href="https://twitter.com/share?url={{ article.link }}" target="_blank">
-                            <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
-                        </a>
+                                    <!-- Twitter -->
+                                    <a href="https://twitter.com/share?url={{ article.link }}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                                    </a>
 
-                        <!-- Google+ -->
-                        <a href="https://plus.google.com/share?url={{ article.link }}" target="_blank">
-                            <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
-                        </a>
-                        <p><a href="{{ article.link }}">Read More</a></p>
-                    </div>
+                                    <!-- Google+ -->
+                                    <a href="https://plus.google.com/share?url={{ article.link }}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                                    </a>
+                                    <p><a href="{{ article.link }}">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        {% endfor %}
+            <div class="col-md-6">
+                <h1>Most Recent</h1>
+                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                    {% for article in recent %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading{{ forloop.counter|ordinal }}">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{ forloop.counter|ordinal }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter|ordinal }}">
+                                        {{ article.title }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{ forloop.counter|ordinal }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ forloop.counter|ordinal }}">
+                                <div class="panel-body">
+                                    <p>{{ article.description }}</p>
+                                    <!-- Facebook -->
+                                    <a href="http://www.facebook.com/sharer.php?u={{ article.link }}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                                    </a>
+
+                                    <!-- Twitter -->
+                                    <a href="https://twitter.com/share?url={{ article.link }}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                                    </a>
+
+                                    <!-- Google+ -->
+                                    <a href="https://plus.google.com/share?url={{ article.link }}" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                                    </a>
+                                    <p><a href="{{ article.link }}">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 
-    
 {% endblock %}
