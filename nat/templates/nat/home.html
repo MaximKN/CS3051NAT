@@ -7,14 +7,6 @@ Home
 {% endblock %}
 
 {%  block content %}
-    <h1>Home</h1>
-    
-    <form action="/search/" method="get">
-        <input type="text" name="q">
-        <input type="submit" value="Search">
-    </form>
-
-
     <h1>Most Popular</h1>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     {% for article in popular %}
