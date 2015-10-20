@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rssparser import *
 from models import *
 from nat.rssparser import *
+import user_database as udb
 
 region_specifier = 4;
 
@@ -117,13 +118,22 @@ def search(request):
     else:
         return render(request, 'nat/search_results.html', {'error': True})
 
-
 def about(request):
     return render(request, 'nat/about.html')
 
-
 def login(request):
     return render(request, 'nat/login.html')
+
+def logInUser(request):
+    user = udb.log_in(request.GET['username'], request.GET['password'])
+    return render(request, 'nat/login.html', {'loggedInUser' : udb.get_loggedInUser()})
+
+def register_user(request):
+    return render(request, 'nat/register_user.html')
+
+def register(request):
+    udb.register_user(request.GET['username'], request.GET['password'])
+    return render(request, 'nat/home.html')
 
 
 def show_article(request, article_id):
@@ -139,6 +149,7 @@ def show_category(request, newscategory_id):
         'category': category,
     }
     return render(request, 'nat/category.html', context)
+
 
 
 '''def show_feed(request, feed_id):
