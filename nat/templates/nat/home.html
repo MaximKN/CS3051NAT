@@ -1,18 +1,4 @@
-{#{% extends 'nat/base.html' %}#}
-{##}
-{#{% block title %}#}
-{#Home#}
-{#{% endblock %}#}
-{##}
-{#{%  block content %}#}
-{#    <h1>Home</h1>#}
-{#    {% for article in articles %}#}
-{#        <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>#}
-{#        <div>{{ article.description }}</div>#}
-{#        <pre>{{ article.link }}</pre>#}
-{#        <pre>{{ article.source }}</pre>#}
-{#    {% endfor %}#}
-{#{% endblock %}#}
+
 
 {% extends 'nat/base.html' %}
 
@@ -28,71 +14,27 @@ Home
         <input type="submit" value="Search">
     </form>
 
-{# Why have it twice? #}
-{#    {% for article in articles %}#}
-{#        <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>#}
-{#        <div>{{ article.date }}</div>#}
-{#        <pre>{{ article.link }}</pre>#}
-{#        <pre>{{ article.source }}</pre>#}
-{#    {% endfor %}#}
-    <li>
-    {% for newscategory in newscategories %}
-        <ul><a href="{% url 'newscategory' newscategory.id %}"> {{ newscategory.title }}</a></ul>
+
+    <h1>Most Popular</h1>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {% for article in popular %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                            {{ article.title }}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
+                    <div class="panel-body">
+                        <p>{{ article.description }}</p>
+                        <a href="{{ article.link }}">Read More</a>
+                    </div>
+                </div>
+            </div>
     {% endfor %}
-    </li>
-    <li>
-    {% for rssfeed in rssfeeds %}
-        <ul><a href="{% url 'rssfeed' rssfeed.id %}"> {{ rssfeed.title }}</a></ul>
-    {% endfor %}
-    </li>
-    
-    <ul class="accordion" id="accordion">
-      <li class="bg1">
-        <div class="heading">Heading</div>
-        <div class="bgDescription"></div>
-        <div class="description">
-          <h2>Heading 1</h2>
-          <p>Description 1</p>
-          <a href="#">Read more</a> </div>
-      </li>
-    </ul>
-    <ul class="accordion" id="accordion">
-      <li class="bg2">
-        <div class="heading">Heading2</div>
-        <div class="bgDescription"></div>
-        <div class="description">
-          <h2>Heading 2</h2>
-          <p>Description 2</p>
-          <a href="#">Read more</a> </div>
-      </li>
-    </ul>
-    <ul class="accordion" id="accordion">
-      <li class="bg3">
-        <div class="heading">Heading3</div>
-        <div class="bgDescription"></div>
-        <div class="description">
-          <h2>Heading 3</h2>
-          <p>Description 3</p>
-          <a href="#">Read more</a> </div>
-      </li>
-    </ul>
-    <ul class="accordion" id="accordion">
-      <li class="bg4">
-        <div class="heading">Heading4</div>
-        <div class="bgDescription"></div>
-        <div class="description">
-          <h2>Heading 4</h2>
-          <p>Description 4</p>
-          <a href="#">Read more</a> </div>
-      </li>
-    </ul>
-    
-    {% for article in articles %}
-        {% if article.country == region_specifier %}
-        <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
-        <div>{{ article.get_short_text }}</div>
-        <pre>{{ article.link }}</pre>
-        <pre>{{ article.source }}</pre>
-        {% endif %}
-    {% endfor %}
+    </div>
+
+
 {% endblock %}
