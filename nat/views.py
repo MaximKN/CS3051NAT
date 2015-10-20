@@ -29,6 +29,7 @@ def var(word, var):
         return " " + word + " "
 
 
+
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         # what the person types in for searching
