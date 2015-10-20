@@ -30,10 +30,10 @@ def parse_rss():
                 ['http://www.dailymail.co.uk/auhome/index.rss', 'http://www.abc.net.au/news/feed/46182/rss.xml', 'http://www.smh.com.au/rssheadlines/top.xml'],
                 ['http://rss.in.gr/feed/news/greece/', 'http://ellinikanea.gr/feed/','http://www.tanea.gr/rss']]
     rss_number = 0
-    country_specifier = 0;
+    country_specifier = 0
     for rss_country_urls in rss_all_urls:
         for rss_url in rss_country_urls:
-            print(rss_url);
+            print(rss_url)
             # Later change this to parse urls retrieved from RssFeeds
             feeds = feedparser.parse(rss_url)
             articles = nat.models.Article.objects.all()
