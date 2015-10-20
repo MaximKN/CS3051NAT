@@ -3,7 +3,7 @@ from rssparser import *
 from models import *
 from nat.rssparser import *
 
-region_specifier = 0;
+region_specifier = 4;
 
 def home(request):
     articles = Article.objects.all()
