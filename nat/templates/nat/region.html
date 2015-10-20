@@ -1,0 +1,14 @@
+{% extends 'nat/base.html' %}
+
+{% block title %}
+{{ category.title }}
+{% endblock %}
+
+{%  block content %}
+    {% for article in articles %}
+        <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
+        <div>{{ article.description }}</div>
+        <pre>{{ article.link }}</pre>
+        <pre>{{ article.source }}</pre>
+    {% endfor %}
+{% endblock %}
