@@ -3,6 +3,7 @@ from rssparser import *
 from models import *
 from nat.rssparser import *
 
+region_specifier = 4;
 
 def home(request):
     articles = Article.objects.all()
@@ -10,6 +11,7 @@ def home(request):
     rssfeeds = RssFeed.objects.all()
     popular = most_popular()
     context = {
+        'region_specifier': region_specifier,
         'articles': articles,
         'newscategories': newscategories,
         'rssfeeds': rssfeeds,
@@ -21,6 +23,15 @@ def most_popular():
     keyword = find_most_popular_keyword()
     return Article.objects.filter(title__icontains=keyword)[:10]
 
+def var(word, var):
+    if var == 0:
+        return word
+    if var == 1:
+        return word + " "
+    if var == 2:
+        return " " + word
+    if var == 3:
+        return " " + word + " "
 
 
 def search(request):
@@ -36,13 +47,51 @@ def search(request):
         #finds all articles with a keyword contained in q
         for keyWord in q:
             tempList = Article.objects.filter(title__icontains=keyWord)
+            tempList2 = Article.objects.filter(description__icontains=keyWord)
             articles += tempList
+            articles += tempList2
 
         #filter multiple occurances of articles for different keywords
         for article in articles:
             while articles.count(article) > 1:
                 articles.remove(article)
 
+        if len(q) == 1:
+            for article in articles:
+                article.search_order = 0
+                if (var(qString.lower(), 3) in article.title.lower()):
+                    article.search_order += 50
+                if var(qString.lower(), 3) in article.description.lower():
+                    article.search_order += 25
+                if len(qString) > 4:
+                    if (qString.lower() in article.title.lower()):
+                        article.search_order +=50
+                    if (qString.lower() in article.title.lower()):
+                        article.search_order +=25
+        else:
+            # find best articles to match higher search order = better
+            for article in articles:
+                article.search_order = 0
+                if qString.lower() in article.title.lower():
+                    article.search_order += 100
+                if qString.lower() in article.description.lower():
+                    article.search_order += 75
+                for keyWord in q:
+                    if var(keyWord.lower(), 0) in article.title.lower():
+                        # print(article.search_order)
+                        article.search_order += 20
+                    if var(keyWord.lower(), 0) in article.description.lower():
+                        article.search_order += 5
+
+        # removing articles that failed to be relevant enough with the search
+        articles[:] = [article for article in articles if (article.search_order >= 25)]
+
+        for i in range(len(articles) - 1, 0, -1):
+            for j in range(i):
+                if articles[j].search_order < articles[j + 1].search_order:
+                    temp = articles[j]
+                    articles[j] = articles[j + 1]
+                    articles[j + 1] = temp
 
         #find best articles to match higher search order = better
         for article in articles:
