@@ -27,7 +27,14 @@ Home
         <input type="text" name="q">
         <input type="submit" value="Search">
     </form>
-    
+
+{# Why have it twice? #}
+{#    {% for article in articles %}#}
+{#        <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>#}
+{#        <div>{{ article.date }}</div>#}
+{#        <pre>{{ article.link }}</pre>#}
+{#        <pre>{{ article.source }}</pre>#}
+{#    {% endfor %}#}
     <li>
     {% for newscategory in newscategories %}
         <ul><a href="{% url 'newscategory' newscategory.id %}"> {{ newscategory.title }}</a></ul>
@@ -81,9 +88,11 @@ Home
     </ul>
     
     {% for article in articles %}
+        {% if article.country == region_specifier %}
         <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
         <div>{{ article.get_short_text }}</div>
         <pre>{{ article.link }}</pre>
         <pre>{{ article.source }}</pre>
+        {% endif %}
     {% endfor %}
 {% endblock %}

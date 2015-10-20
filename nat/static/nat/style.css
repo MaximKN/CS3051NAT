@@ -1,7 +1,29 @@
 /*All changes made to the template go here*/
-
 .main-content{
     margin-top: 80px;
+}
+
+.navbar-default {
+  background-color: #163150;
+  border-color: transparent;
+}
+
+div.article
+{
+  background-color: #75000d;
+  color:white;
+  margin:20px;
+  padding:20px;
+  width: 800px;
+  height: 200px;
+}
+
+.dropdown-menu > li > a {
+  margin-top: -40px;
+}
+
+.navbar-form {
+  margin-left: -30px;
 }
 
 ul.accordion {
