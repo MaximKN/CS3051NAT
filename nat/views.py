@@ -126,7 +126,7 @@ def login(request):
 
 def logInUser(request):
     user = udb.log_in(request.GET['username'], request.GET['password'])
-    return render(request, 'nat/login.html', {'loggedInUser' : udb.get_loggedInUser()})
+    return render(request, 'nat/home.html', {'loggedInUser' : udb.get_loggedInUser()})
 
 def register_user(request):
     return render(request, 'nat/register_user.html')
