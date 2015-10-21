@@ -39,6 +39,11 @@
                                     <a href="https://plus.google.com/share?url={{ article.link }}" target="_blank">
                                         <img src="http://i1042.photobucket.com/albums/b422/SherlockCruz/google116-2_zpsurvck5kk.png" width="40" height="40" alt="Google" />
                                     </a>
+
+                                    <!-- Add article to favourites (button) -->
+                                    <a href="{% url 'addFavouriteArticles' article.id %}" name="article" value="{{ article.id }}">
+                                        <button type="submit" class="btn article-favourite-button" name="article" value = {{ article.id }}><span class="glyphicon glyphicon-star" width="50" height="50"></span></button>
+                                     </a>
                                     <p></p>
                                     <p><a href="{{ article.link }}">Read More</a></p>
                                 </div>

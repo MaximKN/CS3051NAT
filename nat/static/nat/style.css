@@ -52,3 +52,22 @@
   background-color: transparent;
   border-color: transparent;
 }
+
+.navbar-favourite-button {
+  color: white;
+  background-color: transparent;
+  border-color: transparent;
+  margin-top: 3px;
+}
+
+.col-md-4 {
+    width: 33.33333333%;
+    float: left;
+  }
+
+
+.article-favourite-button
+{
+  color: black;
+  background-color: transparent;
+}

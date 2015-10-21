@@ -108,6 +108,9 @@
                       </ul> 
                      </li>
          </ul>
+             <!-- Favourites button -->
+             <a href="{% url 'favourite_articles' %}">
+             <form type="submit" class="btn navbar-favourite-button" name="article"><span class="glyphicon glyphicon-star" width="30" height="30"></span></form></a>
              <!-- Search bar placed in top nav bar -->
             <form class="navbar-form navbar-right" action="/search/" method="get">
                 <input type="text" name="q">
