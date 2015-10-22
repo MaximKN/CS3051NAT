@@ -4,8 +4,8 @@ from nat.models import Article
 class ArticleTestCase(TestCase):
     def setUp(self):
         a = Article()
-        a.set_attributes("Test title", "Test description",
-                         0, "Test link", 1)
+        a.set_attributes_without_date("Test title", "Test description",
+                                      0, "Test link", 1)
         a.save()
 
     def test_article_attributes(self):
