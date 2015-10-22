@@ -1,6 +1,11 @@
 {% extends 'nat/base.html' %}
 
+{% block title %}
+    {{ categoryTitle }}
+{% endblock %}
+
 {%  block content %}
+    <h1>{{ categoryTitle }}</h1>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     {% for article in articles %}
                         <div class="panel panel-default">
