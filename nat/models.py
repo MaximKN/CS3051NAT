@@ -52,7 +52,7 @@ class Article(models.Model):
         self.date = date
         self.country = specifier
 
-    def set_attributes(self, title, description, source, link,  specifier):
+    def set_attributes_without_date(self, title, description, source, link, specifier):
         self.title = title
         self.description = description
         self.source = source
