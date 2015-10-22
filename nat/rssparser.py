@@ -44,17 +44,17 @@ def parse_rss():
             articles = nat.models.Article.objects.all()
             for entry in feeds.entries:
                 description = HTMLParser.HTMLParser().unescape(striphtml(entry.description))
-                if not nat.models.Article.objects.filter(title=entry.title).exists() or \
-                   len(articles) == 0 or len(description) != 0:
-                    a = nat.models.Article()
-                    if 'pubDate' in entry:
-                        a.set_attributes(entry.title, description, rss_number,
-                                         entry.link, entry.pubDate, category_specifier)
-                    else:
-                         a.set_attributes_without_date(entry.title, description, rss_number,
-                                                       entry.link, category_specifier)
-                    a.save()
-
+                if len(description) != 0:
+                    if not nat.models.Article.objects.filter(title=entry.title).exists() or \
+                       len(articles) == 0:
+                        a = nat.models.Article()
+                        if 'pubDate' in entry:
+                            a.set_attributes(entry.title, description, rss_number,
+                                             entry.link, entry.pubDate, category_specifier)
+                        else:
+                             a.set_attributes_without_date(entry.title, description, rss_number,
+                                                           entry.link, category_specifier)
+                        a.save()
             rss_number += 1
         category_specifier += 1
     print "Pulling complete!"
