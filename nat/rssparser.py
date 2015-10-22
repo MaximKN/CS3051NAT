@@ -47,14 +47,14 @@ def parse_rss():
                     a = nat.models.Article()
                     if 'pubDate' in entry:
                         a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
-                                        rss_number, entry.link, entry.pubDate, category_specifier)
+                                         rss_number, entry.link, entry.pubDate, category_specifier)
                     else:
                          a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
-                                        rss_number, entry.link, category_specifier)
+                                          rss_number, entry.link, category_specifier)
                     a.save()
 
             rss_number += 1
-        category_specifier +=1
+        category_specifier += 1
     print "Pulling complete!"
 
 
@@ -71,4 +71,3 @@ def find_most_popular_keyword():
     word_freq = {}
 
     return max(set(words), key=words.count)
-
