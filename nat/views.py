@@ -160,10 +160,38 @@ def show_article(request, article_id):
     return render(request, 'nat/article.html', {'article': article})
 
 def show_category(request, category_specifier):
-    articles = Article.objects.filter(country=category_specifier)
+    articles_cat = Article.objects.filter(country=category_specifier)
+    category_title = get_category_name(category_specifier)
     context = {
-        'articles': articles
+        'articles': articles_cat,
+        'categoryTitle': category_title
     }
     return render(request, 'nat/category.html', context)
+
+def get_category_name(category_specifier):
+    if category_specifier == "0":
+        return "Worldwide"
+    elif category_specifier == "1":
+        return "United Kingdom"
+    elif category_specifier == "2":
+        return "United States of America"
+    elif category_specifier == "3":
+        return "France"
+    elif category_specifier == "4":
+        return "Russia"
+    elif category_specifier == "5":
+        return "Australia"
+    elif category_specifier == "6":
+        return "Greece"
+    elif category_specifier == "7":
+        return "World News"
+    elif category_specifier == "8":
+        return "Sport"
+    elif category_specifier == "9":
+        return "Politics"
+    elif category_specifier == "10":
+        return "Health"
+    elif category_specifier == "11":
+        return "Entertainment"
 
 
