@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Bootstrap core CSS TEMPLATE -->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.css">
+{% extends 'nat/base.html' %}
 
-    <!-- Custom styles for this template -->
-   <link href="../../static/nat/style.css" rel="stylesheet">
-
-      <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{%  block content %}
     <div class="col-md-6">
         <h1>Favourite Articles</h1>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -56,13 +43,4 @@
             {% endfor %}
         </div>
     </div>
-<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  </body>
-</html>
+{% endblock %}
