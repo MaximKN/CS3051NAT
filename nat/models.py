@@ -3,6 +3,7 @@ from django.db import models
 import cgi
 
 SHORT_LEN_TEXT = 200
+region_specifier = 5
 
 
 class NewsCategory(models.Model):

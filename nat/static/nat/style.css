@@ -8,11 +8,11 @@
 .navbar-default {
   background-color: #163150;
   border-color: transparent;
-  padding-bottom: -20px;
+  /*padding-bottom: -20px;*/
 }
 
 .dropdown-menu > li > a {
-  margin-top: -40px;
+  /* margin-top: -40px;*/
 }
 
 .navbar-form {
