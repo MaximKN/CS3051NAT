@@ -125,9 +125,6 @@ def search(request):
     else:
         return render(request, 'nat/search_results.html', {'error': True})
 
-def about(request):
-    return render(request, 'nat/about.html')
-
 def login(request):
     return render(request, 'nat/login.html')
 
@@ -155,7 +152,6 @@ def addFavouriteArticles(request, article_id):
 def show_article(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     return render(request, 'nat/article.html', {'article': article})
-
 
 def show_category(request, category_specifier):
     articles = Article.objects.filter(country=category_specifier)
