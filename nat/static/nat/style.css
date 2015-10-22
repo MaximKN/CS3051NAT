@@ -1,24 +1,17 @@
 /*All changes made to the template go here*/
 
-.main-content{
+.main-content {
     margin-top: -10px;
 }
-
 
 .navbar-default {
   background-color: #163150;
   border-color: transparent;
-  /*padding-bottom: -20px;*/
-}
-
-.dropdown-menu > li > a {
-  /* margin-top: -40px;*/
 }
 
 .navbar-form {
   margin-left: -30px;
 }
-
 
 .navbar-nav > li > a {
   padding-top: 13px;
@@ -67,31 +60,12 @@
   }
 
 
-.article-favourite-button
-{
+.article-favourite-button {
   color: #000000;
   background-color: transparent;
   margin-left: -15px;
 }
 
-.article-favourite-button:hover{
+.article-favourite-button:hover {
   color: #000000;
 }
-
-panel-heading{
-  background-color: #1CA347;
-  color: #00415d;
-}
-
-.panel-heading > .dropdown .dropdown-toggle {
-  background-color: #00415d;
-  color: #75000d;
-}
-
-.container-fluid {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 50px;
-}
-

@@ -5,7 +5,6 @@ from . import views
 urlpatterns = [
     url(r'^$', 'nat.views.home', name='home'),
     url(r'^addFavouriteArticles/(?P<article_id>[0-9]+)/$', 'nat.views.addFavouriteArticles', name='addFavouriteArticles'),
-    url(r'^about$', 'nat.views.about', name='about'),
     url(r'^articles/(?P<article_id>[0-9]+)/$', 'nat.views.show_article', name='article'),
     url(r'^category/([0-9]+)/$', 'nat.views.show_category', name='category'),
     # url(r'^feed/(?P<rssfeed_id>[0-9]+)/$', 'nat.views.show_feed', name='rssfeed')
