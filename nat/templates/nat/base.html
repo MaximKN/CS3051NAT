@@ -64,18 +64,25 @@
                           <li><a href="/category/8">Sport</a></li>  
                           <li><a href="/category/9">Politics</a></li> 
                           <li><a href="/category/10">Health</a></li> 
-                          <li><a href="/category/11">Entertainment</a></li> 
+                          <li><a hre f="/category/11">Entertainment</a></li>
                       </ul> 
                   </li>
               </ul>
-              <!-- Search bar placed in top nav bar -->
-              <form class="navbar-form navbar-right" action="/search/" method="get">
-                  <input type="text" name="q">
-                  <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search" width="30" height="30"></span></button>
-              </form>
-          </div>
-      </div>
-  </nav>
+             <!-- Favourites button -->
+             <a href="{% url 'favourite_articles' %}">
+             <form type="submit" class="btn navbar-favourite-button" name="article"><span class="glyphicon glyphicon-star"></span>
+             </form></a>
+             <!-- User logged in -->
+             <a href="{% url 'home' %}" style="color: white">{{ loggedInUser }}</a>
+             <!-- Search bar placed in top nav bar -->
+            <form class="navbar-form navbar-right" action="/search/" method="get">
+                <input type="text" name="q">
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search" width="30" height="30"></span></button>
+            </form>
+        </div>
+
+    </div>
+ </nav>
 
   <div class="container main-content">
       {% block content %}

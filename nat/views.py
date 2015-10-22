@@ -13,6 +13,11 @@ def home(request):
     rssfeeds = RssFeed.objects.all()
     popular = most_popular()
     recent = most_recent()
+    user = udb.get_loggedInUser()
+    username = ''
+    if user is not None:
+        username = user.user_name
+
     global context
     context = {
         'region_specifier': region_specifier,
@@ -21,6 +26,7 @@ def home(request):
         'rssfeeds': rssfeeds,
         'popular' : popular,
         'recent' : recent,
+        'loggedInUser': username
     }
     return render(request, 'nat/home.html', context)
 
@@ -40,7 +46,6 @@ def var(word, var):
         return " " + word
     if var == 3:
         return " " + word + " "
-
 
 def search(request):
     if 'q' in request.GET and request.GET['q']:
@@ -129,15 +134,15 @@ def login(request):
 def logInUser(request):
     udb.log_in(request.GET['username'], request.GET['password'])
     contextCopy = context.copy()
-    contextCopy.update({'loggedInUser': udb.get_loggedInUser()})
-    return render(request, 'nat/home.html', context)
+    contextCopy.update({'loggedInUser': udb.get_loggedInUser().user_name})
+    return render(request, 'nat/home.html', contextCopy)
 
 def register_user(request):
     return render(request, 'nat/register_user.html')
 
 def register(request):
     udb.register_user(request.GET['username'], request.GET['password'])
-    return render(request, 'nat/home.html', context)
+    return logInUser(request)
 
 def favouriteArticles(request):
     articles = udb.getFavouriteArticle()
@@ -160,12 +165,3 @@ def show_category(request, category_specifier):
     return render(request, 'nat/category.html', context)
 
 
-
-'''def show_feed(request, feed_id):
-    feed = get_object_or_404(RssFeed, id=feed_id)
-    articles = feed.article_set.all()
-    context = {
-        'articles': articles,
-        'feed': feed,
-    }
-    return render(request, 'nat/feed.html', context)'''
