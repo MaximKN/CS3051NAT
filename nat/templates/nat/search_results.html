@@ -1,6 +1,12 @@
-<head>
-    <title>Search</title>
-</head>
+
+{% extends 'nat/base.html' %}
+{% block title %}
+    Search
+{% endblock %}
+
+
+{%  block content %}
+
 <body>
     <form action="/search/" method="get">
         <input type="text" name="q">
@@ -19,12 +25,41 @@
         <p>Found {{ articles|length }} article{{ articles|pluralize }}.</p>
         <ul>
             {% for article in articles %}
-            <h4><a href="{% url 'article' article.id %}"> {{ article.title }}</a></h4>
-            <div>{{ article.description }}</div>
-            <pre>{{ article.link }}</pre>
+             <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                        {{ article.title }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
+                                <div class="panel-body">
+                                    <p>{{ article.description }}</p>
+                                    <!-- Facebook -->
+                                    <a href="http://www.facebook.com/sharer.php?u={{ article.link }}" target="_blank">
+                                        <img src="http://i1042.photobucket.com/albums/b422/SherlockCruz/facebook31_zpsoposwjam.png" width="40" height="40" alt="Facebook" />
+                                    </a>
+
+                                    <!-- Twitter -->
+                                    <a href="https://twitter.com/share?url={{ article.link }}" target="_blank">
+                                        <img src="http://i1042.photobucket.com/albums/b422/SherlockCruz/twitter1-2_zpsqsjqapxp.png" width="40" height="40" alt="Twitter" />
+                                    </a>
+
+                                    <!-- Google+ -->
+                                    <a href="https://plus.google.com/share?url={{ article.link }}" target="_blank">
+                                        <img src="http://i1042.photobucket.com/albums/b422/SherlockCruz/google116-2_zpsurvck5kk.png" width="40" height="40" alt="Google" />
+                                    </a>
+                                    <p></p>
+                                    <p><a href="{{ article.link }}">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
             {% endfor %}
         </ul>
 {% else %}
+        <p>You searched for: <strong>{{ query }}</strong></p>
     <p>No article matched your search criteria.</p>
 {% endif %}
 {% endif %}
+{% endblock %}

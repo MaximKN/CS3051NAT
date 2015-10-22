@@ -28,9 +28,14 @@ def parse_rss():
                 ['http://www.france24.com/fr/france/rss', 'http://www.lemonde.fr/m-actu/rss_full.xml','http://www.lexpress.fr/rss/alaune.xml'],
                 ['http://wsrss.bbc.co.uk/russian/index.xml', 'http://www.pravda.ru/export-news.xml', 'https://russian.rt.com/rss/'],
                 ['http://www.dailymail.co.uk/auhome/index.rss', 'http://www.abc.net.au/news/feed/46182/rss.xml', 'http://www.smh.com.au/rssheadlines/top.xml'],
-                ['http://rss.in.gr/feed/news/greece/', 'http://ellinikanea.gr/feed/','http://www.tanea.gr/rss']]
+                ['http://rss.in.gr/feed/news/greece/', 'http://ellinikanea.gr/feed/','http://www.tanea.gr/rss'],
+                ['http://feeds.foxnews.com/foxnews/science?format=xml','http://www.thetimes.co.uk/tto/science/rss','http://www.dailymail.co.uk/sciencetech/index.rss'],
+                ['http://feeds.foxnews.com/foxnews/sports?format=xml', 'http://www.dailymail.co.uk/sport/index.rss'],
+                ['http://feeds.skynews.com/feeds/rss/politics.xml', 'http://feeds.foxnews.com/foxnews/politics?format=xml'],
+                ['http://feeds.foxnews.com/foxnews/health?format=xml', 'http://www.dailymail.co.uk/health/index.rss'],
+                ['http://feeds.foxnews.com/foxnews/entertainment?format=xml', 'http://feeds.skynews.com/feeds/rss/entertainment.xml', 'http://www.dailymail.co.uk/tvshowbiz/index.rss']]
     rss_number = 0
-    country_specifier = 0
+    category_specifier = 0
     for rss_country_urls in rss_all_urls:
         for rss_url in rss_country_urls:
             print(rss_url)
@@ -42,21 +47,14 @@ def parse_rss():
                     a = nat.models.Article()
                     if 'pubDate' in entry:
                         a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
-                                        rss_number, entry.link, entry.pubDate, country_specifier)
+                                        rss_number, entry.link, entry.pubDate, category_specifier)
                     else:
                          a.set_attributes(entry.title, HTMLParser.HTMLParser().unescape(striphtml(entry.description)),
-                                        rss_number, entry.link, country_specifier)
+                                        rss_number, entry.link, category_specifier)
                     a.save()
-                    if 'categories' in entry and len(entry.categories) > 0:
-                        categoriesindb = nat.models.NewsCategory.objects.all()
-                        for category in entry.categories:
-                            for dbcategory in categoriesindb:
-                                if dbcategory.title == category:
-                                    a.categories.add(dbcategory)
-                        a.save()
 
             rss_number += 1
-        country_specifier +=1
+        category_specifier +=1
     print "Pulling complete!"
 
 

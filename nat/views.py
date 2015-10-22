@@ -141,12 +141,10 @@ def show_article(request, article_id):
     return render(request, 'nat/article.html', {'article': article})
 
 
-def show_category(request, newscategory_id):
-    category = get_object_or_404(NewsCategory, id=newscategory_id)
-    articles = category.article_set.all()
+def show_category(request, category_specifier):
+    articles = Article.objects.filter(country=category_specifier)
     context = {
-        'articles': articles,
-        'category': category,
+        'articles': articles
     }
     return render(request, 'nat/category.html', context)
 
