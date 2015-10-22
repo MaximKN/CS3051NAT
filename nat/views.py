@@ -5,6 +5,7 @@ from nat.rssparser import *
 import user_database as udb
 
 region_specifier = 4;
+context = None
 
 def home(request):
     articles = Article.objects.all()
@@ -12,6 +13,7 @@ def home(request):
     rssfeeds = RssFeed.objects.all()
     popular = most_popular()
     recent = most_recent()
+    global context
     context = {
         'region_specifier': region_specifier,
         'articles': articles,
@@ -125,16 +127,25 @@ def login(request):
     return render(request, 'nat/login.html')
 
 def logInUser(request):
-    user = udb.log_in(request.GET['username'], request.GET['password'])
-    return render(request, 'nat/home.html', {'loggedInUser' : udb.get_loggedInUser()})
+    udb.log_in(request.GET['username'], request.GET['password'])
+    contextCopy = context.copy()
+    contextCopy.update({'loggedInUser': udb.get_loggedInUser()})
+    return render(request, 'nat/home.html', context)
 
 def register_user(request):
     return render(request, 'nat/register_user.html')
 
 def register(request):
     udb.register_user(request.GET['username'], request.GET['password'])
-    return render(request, 'nat/home.html')
+    return render(request, 'nat/home.html', context)
 
+def favouriteArticles(request):
+    articles = udb.getFavouriteArticle()
+    return render(request, 'nat/favourite_articles.html', {'favouriteArticles': articles})
+
+def addFavouriteArticles(request, article_id):
+    udb.addFavouriteArticle(Article.objects.get(id=article_id))
+    return render(request, 'nat/home.html', context)
 
 def show_article(request, article_id):
     article = get_object_or_404(Article, id=article_id)

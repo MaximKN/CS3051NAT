@@ -52,3 +52,45 @@
   background-color: transparent;
   border-color: transparent;
 }
+
+.navbar-favourite-button {
+  color: #ffffff;
+  background-color: transparent;
+  border-color: transparent;
+  margin-top: 3px;
+}
+
+.col-md-4 {
+    width: 33.33333333%;
+    float: left;
+  }
+
+
+.article-favourite-button
+{
+  color: #000000;
+  background-color: transparent;
+  margin-left: -15px;
+}
+
+.article-favourite-button:hover{
+  color: #000000;
+}
+
+panel-heading{
+  background-color: #1CA347;
+  color: #00415d;
+}
+
+.panel-heading > .dropdown .dropdown-toggle {
+  background-color: #00415d;
+  color: #75000d;
+}
+
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 50px;
+}
+
