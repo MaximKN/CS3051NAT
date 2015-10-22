@@ -129,9 +129,15 @@ def login(request):
     return render(request, 'nat/login.html')
 
 def logInUser(request):
+    udb.logOut()
     udb.log_in(request.GET['username'], request.GET['password'])
+    user = udb.get_loggedInUser()
+    username = ''
+    if user is not None:
+        username = user.user_name
+
     contextCopy = context.copy()
-    contextCopy.update({'loggedInUser': udb.get_loggedInUser().user_name})
+    contextCopy.update({'loggedInUser': username})
     return render(request, 'nat/home.html', contextCopy)
 
 def register_user(request):

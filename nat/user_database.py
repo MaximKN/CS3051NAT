@@ -19,6 +19,10 @@ def log_in(username, user_password):
 
     return None
 
+def logOut():
+    global loggedInUser
+    loggedInUser = None
+
 def addFavouriteArticle(favouriteArticle):
     global loggedInUser
     if loggedInUser is not None:
