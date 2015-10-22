@@ -6,13 +6,6 @@
 
 
 {%  block content %}
-
-<body>
-    <form action="/search/" method="get">
-        <input type="text" name="q">
-        <input type="submit" value="Search">
-    </form>
-</body>
 </html>
 
 {% if error %}
@@ -25,7 +18,7 @@
         <p>Found {{ articles|length }} article{{ articles|pluralize }}.</p>
         <ul>
             {% for article in articles %}
-             <div class="panel panel-default">
+                        <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
@@ -50,12 +43,17 @@
                                     <a href="https://plus.google.com/share?url={{ article.link }}" target="_blank">
                                         <img src="http://i1042.photobucket.com/albums/b422/SherlockCruz/google116-2_zpsurvck5kk.png" width="40" height="40" alt="Google" />
                                     </a>
+
+                                    <!-- Add article to favourites (button) -->
+                                    <a href="{% url 'addFavouriteArticles' article.id %}" name="article" value="{{ article.id }}">
+                                        <button type="submit" class="btn article-favourite-button" name="article" value = {{ article.id }}><span class="glyphicon glyphicon-star" style="font-size:35px;"></span></button>
+                                     </a>
                                     <p></p>
                                     <p><a href="{{ article.link }}">Read More</a></p>
                                 </div>
                             </div>
                         </div>
-            {% endfor %}
+                    {% endfor %}
         </ul>
 {% else %}
         <p>You searched for: <strong>{{ query }}</strong></p>
